@@ -182,15 +182,11 @@ type ProjectsOperationsService struct {
 
 // AllocateIdsRequest: The request for Datastore.AllocateIds.
 type AllocateIdsRequest struct {
-	// DatabaseId: If not empty, the ID of the database against which to
-	// make the request.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// Keys: Required. A list of keys with incomplete key paths for which to
 	// allocate IDs. No key may be reserved/read-only.
 	Keys []*Key `json:"keys,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
+	// ForceSendFields is a list of field names (e.g. "Keys") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -198,8 +194,8 @@ type AllocateIdsRequest struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
-	// API requests with the JSON null value. By default, fields with empty
+	// NullFields is a list of field names (e.g. "Keys") to include in API
+	// requests with the JSON null value. By default, fields with empty
 	// values are omitted from API requests. However, any field with an
 	// empty value appearing in NullFields will be sent to the server as
 	// null. It is an error if a field in this list has a non-empty value.
@@ -278,27 +274,24 @@ func (s *ArrayValue) MarshalJSON() ([]byte, error) {
 
 // BeginTransactionRequest: The request for Datastore.BeginTransaction.
 type BeginTransactionRequest struct {
-	// DatabaseId: If not empty, the ID of the database against which to
-	// make the request.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// TransactionOptions: Options for a new transaction.
 	TransactionOptions *TransactionOptions `json:"transactionOptions,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
-	// unconditionally include in API requests. By default, fields with
+	// ForceSendFields is a list of field names (e.g. "TransactionOptions")
+	// to unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
 	// sent to the server regardless of whether the field is empty or not.
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
-	// API requests with the JSON null value. By default, fields with empty
-	// values are omitted from API requests. However, any field with an
-	// empty value appearing in NullFields will be sent to the server as
-	// null. It is an error if a field in this list has a non-empty value.
-	// This may be used to include null fields in Patch requests.
+	// NullFields is a list of field names (e.g. "TransactionOptions") to
+	// include in API requests with the JSON null value. By default, fields
+	// with empty values are omitted from API requests. However, any field
+	// with an empty value appearing in NullFields will be sent to the
+	// server as null. It is an error if a field in this list has a
+	// non-empty value. This may be used to include null fields in Patch
+	// requests.
 	NullFields []string `json:"-"`
 }
 
@@ -343,10 +336,6 @@ func (s *BeginTransactionResponse) MarshalJSON() ([]byte, error) {
 
 // CommitRequest: The request for Datastore.Commit.
 type CommitRequest struct {
-	// DatabaseId: If not empty, the ID of the database against which to
-	// make the request.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// Mode: The type of commit to perform. Defaults to `TRANSACTIONAL`.
 	//
 	// Possible values:
@@ -372,7 +361,7 @@ type CommitRequest struct {
 	// Datastore.BeginTransaction.
 	Transaction string `json:"transaction,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
+	// ForceSendFields is a list of field names (e.g. "Mode") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -380,8 +369,8 @@ type CommitRequest struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
-	// API requests with the JSON null value. By default, fields with empty
+	// NullFields is a list of field names (e.g. "Mode") to include in API
+	// requests with the JSON null value. By default, fields with empty
 	// values are omitted from API requests. However, any field with an
 	// empty value appearing in NullFields will be sent to the server as
 	// null. It is an error if a field in this list has a non-empty value.
@@ -439,8 +428,8 @@ func (s *CommitResponse) MarshalJSON() ([]byte, error) {
 // CompositeFilter: A filter that merges multiple other filters using
 // the given operator.
 type CompositeFilter struct {
-	// Filters: The list of filters to combine. Requires: * At least one
-	// filter is present.
+	// Filters: The list of filters to combine. Must contain at least one
+	// filter.
 	Filters []*Filter `json:"filters,omitempty"`
 
 	// Op: The operator for combining multiple filters.
@@ -1951,17 +1940,13 @@ func (s *LatLng) UnmarshalJSON(data []byte) error {
 
 // LookupRequest: The request for Datastore.Lookup.
 type LookupRequest struct {
-	// DatabaseId: If not empty, the ID of the database against which to
-	// make the request.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// Keys: Required. Keys of entities to look up.
 	Keys []*Key `json:"keys,omitempty"`
 
 	// ReadOptions: The options for this lookup request.
 	ReadOptions *ReadOptions `json:"readOptions,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
+	// ForceSendFields is a list of field names (e.g. "Keys") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -1969,8 +1954,8 @@ type LookupRequest struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
-	// API requests with the JSON null value. By default, fields with empty
+	// NullFields is a list of field names (e.g. "Keys") to include in API
+	// requests with the JSON null value. By default, fields with empty
 	// values are omitted from API requests. However, any field with an
 	// empty value appearing in NullFields will be sent to the server as
 	// null. It is an error if a field in this list has a non-empty value.
@@ -2145,10 +2130,6 @@ func (s *MutationResult) MarshalJSON() ([]byte, error) {
 // project ID ) are discouraged. Reads and writes of foreign partition
 // IDs may fail if the project is not in an active state.
 type PartitionId struct {
-	// DatabaseId: If not empty, the ID of the database to which the
-	// entities belong.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// NamespaceId: If not empty, the ID of the namespace to which the
 	// entities belong.
 	NamespaceId string `json:"namespaceId,omitempty"`
@@ -2156,7 +2137,7 @@ type PartitionId struct {
 	// ProjectId: The ID of the project to which the entities belong.
 	ProjectId string `json:"projectId,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
+	// ForceSendFields is a list of field names (e.g. "NamespaceId") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -2164,10 +2145,10 @@ type PartitionId struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
-	// API requests with the JSON null value. By default, fields with empty
-	// values are omitted from API requests. However, any field with an
-	// empty value appearing in NullFields will be sent to the server as
+	// NullFields is a list of field names (e.g. "NamespaceId") to include
+	// in API requests with the JSON null value. By default, fields with
+	// empty values are omitted from API requests. However, any field with
+	// an empty value appearing in NullFields will be sent to the server as
 	// null. It is an error if a field in this list has a non-empty value.
 	// This may be used to include null fields in Patch requests.
 	NullFields []string `json:"-"`
@@ -2679,15 +2660,11 @@ type ReserveIdsResponse struct {
 
 // RollbackRequest: The request for Datastore.Rollback.
 type RollbackRequest struct {
-	// DatabaseId: If not empty, the ID of the database against which to
-	// make the request.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// Transaction: Required. The transaction identifier, returned by a call
 	// to Datastore.BeginTransaction.
 	Transaction string `json:"transaction,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
+	// ForceSendFields is a list of field names (e.g. "Transaction") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -2695,10 +2672,10 @@ type RollbackRequest struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
-	// API requests with the JSON null value. By default, fields with empty
-	// values are omitted from API requests. However, any field with an
-	// empty value appearing in NullFields will be sent to the server as
+	// NullFields is a list of field names (e.g. "Transaction") to include
+	// in API requests with the JSON null value. By default, fields with
+	// empty values are omitted from API requests. However, any field with
+	// an empty value appearing in NullFields will be sent to the server as
 	// null. It is an error if a field in this list has a non-empty value.
 	// This may be used to include null fields in Patch requests.
 	NullFields []string `json:"-"`
@@ -2720,10 +2697,6 @@ type RollbackResponse struct {
 
 // RunQueryRequest: The request for Datastore.RunQuery.
 type RunQueryRequest struct {
-	// DatabaseId: If not empty, the ID of the database against which to
-	// make the request.
-	DatabaseId string `json:"databaseId,omitempty"`
-
 	// GqlQuery: The GQL query to run. This query must be a non-aggregation
 	// query.
 	GqlQuery *GqlQuery `json:"gqlQuery,omitempty"`
@@ -2740,7 +2713,7 @@ type RunQueryRequest struct {
 	// ReadOptions: The options for this query.
 	ReadOptions *ReadOptions `json:"readOptions,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "DatabaseId") to
+	// ForceSendFields is a list of field names (e.g. "GqlQuery") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -2748,7 +2721,7 @@ type RunQueryRequest struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "DatabaseId") to include in
+	// NullFields is a list of field names (e.g. "GqlQuery") to include in
 	// API requests with the JSON null value. By default, fields with empty
 	// values are omitted from API requests. However, any field with an
 	// empty value appearing in NullFields will be sent to the server as

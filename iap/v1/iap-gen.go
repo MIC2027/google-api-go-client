@@ -309,7 +309,7 @@ type ApplicationSettings struct {
 	// runtime if invalid.
 	CookieDomain string `json:"cookieDomain,omitempty"`
 
-	// CsmSettings: Settings to configure IAP's behavior for a service mesh.
+	// CsmSettings: Settings to configure IAP's behavior for a CSM mesh.
 	CsmSettings *CsmSettings `json:"csmSettings,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g.
@@ -489,11 +489,11 @@ func (s *CorsSettings) MarshalJSON() ([]byte, error) {
 	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
 }
 
-// CsmSettings: Configuration for RCTokens generated for service mesh
-// workloads protected by IAP. RCTokens are IAP generated JWTs that can
-// be verified at the application. The RCToken is primarily used for
-// service mesh deployments, and can be scoped to a single mesh by
-// configuring the audience field accordingly
+// CsmSettings: Configuration for RCTokens generated for CSM workloads
+// protected by IAP. RCTokens are IAP generated JWTs that can be
+// verified at the application. The RCToken is primarily used for ISTIO
+// deployments, and can be scoped to a single mesh by configuring the
+// audience field accordingly
 type CsmSettings struct {
 	// RctokenAud: Audience claim set in the generated RCToken. This value
 	// is not validated by IAP.
@@ -1127,7 +1127,7 @@ type ReauthSettings struct {
 	// reauthenticate again.
 	MaxAge string `json:"maxAge,omitempty"`
 
-	// Method: Reauth method requested.
+	// Method: Reauth method required by the policy.
 	//
 	// Possible values:
 	//   "METHOD_UNSPECIFIED" - Reauthentication disabled.
@@ -1354,8 +1354,7 @@ type TunnelDestGroup struct {
 	Fqdns []string `json:"fqdns,omitempty"`
 
 	// Name: Required. Immutable. Identifier for the TunnelDestGroup. Must
-	// be unique within the project and contain only lower case letters
-	// (a-z) and dashes (-).
+	// be unique within the project.
 	Name string `json:"name,omitempty"`
 
 	// ServerResponse contains the HTTP response code and headers from the
@@ -2635,7 +2634,7 @@ func (r *ProjectsIapTunnelLocationsDestGroupsService) Create(parent string, tunn
 // TunnelDestGroupId sets the optional parameter "tunnelDestGroupId":
 // Required. The ID to use for the TunnelDestGroup, which becomes the
 // final component of the resource name. This value must be 4-63
-// characters, and valid characters are `[a-z]-`.
+// characters, and valid characters are `a-z-`.
 func (c *ProjectsIapTunnelLocationsDestGroupsCreateCall) TunnelDestGroupId(tunnelDestGroupId string) *ProjectsIapTunnelLocationsDestGroupsCreateCall {
 	c.urlParams_.Set("tunnelDestGroupId", tunnelDestGroupId)
 	return c
@@ -2748,7 +2747,7 @@ func (c *ProjectsIapTunnelLocationsDestGroupsCreateCall) Do(opts ...googleapi.Ca
 	//       "type": "string"
 	//     },
 	//     "tunnelDestGroupId": {
-	//       "description": "Required. The ID to use for the TunnelDestGroup, which becomes the final component of the resource name. This value must be 4-63 characters, and valid characters are `[a-z]-`.",
+	//       "description": "Required. The ID to use for the TunnelDestGroup, which becomes the final component of the resource name. This value must be 4-63 characters, and valid characters are `a-z-`.",
 	//       "location": "query",
 	//       "type": "string"
 	//     }
@@ -3267,8 +3266,7 @@ type ProjectsIapTunnelLocationsDestGroupsPatchCall struct {
 // Patch: Updates a TunnelDestGroup.
 //
 // - name: Immutable. Identifier for the TunnelDestGroup. Must be unique
-//   within the project and contain only lower case letters (a-z) and
-//   dashes (-).
+//   within the project.
 func (r *ProjectsIapTunnelLocationsDestGroupsService) Patch(name string, tunneldestgroup *TunnelDestGroup) *ProjectsIapTunnelLocationsDestGroupsPatchCall {
 	c := &ProjectsIapTunnelLocationsDestGroupsPatchCall{s: r.s, urlParams_: make(gensupport.URLParams)}
 	c.name = name
@@ -3385,7 +3383,7 @@ func (c *ProjectsIapTunnelLocationsDestGroupsPatchCall) Do(opts ...googleapi.Cal
 	//   ],
 	//   "parameters": {
 	//     "name": {
-	//       "description": "Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).",
+	//       "description": "Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project.",
 	//       "location": "path",
 	//       "pattern": "^projects/[^/]+/iap_tunnel/locations/[^/]+/destGroups/[^/]+$",
 	//       "required": true,
